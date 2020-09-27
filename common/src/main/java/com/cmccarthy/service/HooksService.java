@@ -1,12 +1,8 @@
 package com.cmccarthy.service;
 
 import cucumber.api.Scenario;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Properties;
 
 @Component
 public class HooksService {

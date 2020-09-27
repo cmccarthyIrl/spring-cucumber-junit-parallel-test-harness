@@ -3,9 +3,8 @@ package com.cmccarthy.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class WikipediaPage extends AbstractPage {
 
     @FindBy(id = "searchbar")

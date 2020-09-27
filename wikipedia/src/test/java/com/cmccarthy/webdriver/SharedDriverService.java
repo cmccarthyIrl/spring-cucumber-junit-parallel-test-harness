@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -28,7 +27,7 @@ import java.util.Objects;
  * </p>
  */
 @Service
-public class SharedDriver extends EventFiringWebDriver {
+public class SharedDriverService extends EventFiringWebDriver {
 
     private static final WebDriver REAL_DRIVER = createDriver();
     private static final Thread CLOSE_THREAD = new Thread() {
@@ -46,7 +45,7 @@ public class SharedDriver extends EventFiringWebDriver {
         final WebDriver driver;
         switch (driverName.toLowerCase()) {
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", Objects.requireNonNull(SharedDriver.class.getClassLoader().getResource("geckodriver")).getPath());
+                System.setProperty("webdriver.gecko.driver", Objects.requireNonNull(SharedDriverService.class.getClassLoader().getResource("geckodriver")).getPath());
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
@@ -62,7 +61,7 @@ public class SharedDriver extends EventFiringWebDriver {
         Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
     }
 
-    public SharedDriver() {
+    public SharedDriverService() {
         super(REAL_DRIVER);
     }
 
