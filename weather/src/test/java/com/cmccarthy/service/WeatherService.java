@@ -1,6 +1,6 @@
 package com.cmccarthy.service;
 
-import com.cmccarthy.models.response.LocationWeatherRootResponse;
+import com.cmccarthy.model.response.LocationWeatherRootResponse;
 import com.cmccarthy.utils.ApplicationProperties;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;

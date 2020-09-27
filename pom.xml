@@ -33,6 +33,7 @@
         <module>common</module>
         <module>weather</module>
         <module>suites</module>
+        <module>wikipedia</module>
     </modules>
 
     <parent>

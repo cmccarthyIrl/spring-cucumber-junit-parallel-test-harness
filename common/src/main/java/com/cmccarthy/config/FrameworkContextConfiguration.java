@@ -11,6 +11,6 @@ import org.springframework.retry.annotation.EnableRetry;
 @ComponentScan({
         "com.cmccarthy"
 })
-@PropertySource("application.properties")
+@PropertySource("classpath:/application.properties")
 public class FrameworkContextConfiguration {
 }

@@ -1,7 +1,7 @@
 package com.cmccarthy.step;
 
 import com.cmccarthy.config.AbstractTestDefinition;
-import com.cmccarthy.models.response.LocationWeatherRootResponse;
+import com.cmccarthy.model.response.LocationWeatherRootResponse;
 import com.cmccarthy.service.LogFactoryService;
 import com.cmccarthy.service.ResponseManagerService;
 import com.cmccarthy.service.WeatherService;

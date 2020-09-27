@@ -14,6 +14,8 @@ public class ApplicationProperties {
     private String password;
     @Value("${base.url.value}")
     private String baseUrl;
+    @Value("${browser}")
+    private String browser;
 
     public String getApiPassword() {
         return apiPassword;
@@ -35,15 +37,7 @@ public class ApplicationProperties {
         this.apiPassword = apiPassword;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public String getBrowser() {
+        return browser;
     }
 }
