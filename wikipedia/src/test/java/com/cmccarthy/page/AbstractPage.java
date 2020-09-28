@@ -14,11 +14,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 
 public abstract class AbstractPage {
 
-    @Autowired
+    @Resource
     private WebDriverService driver;
 
     private Wait<WebDriver> wait;

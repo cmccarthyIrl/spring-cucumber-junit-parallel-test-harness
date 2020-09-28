@@ -1,29 +1,27 @@
 package com.cmccarthy.service;
 
-import com.cmccarthy.utils.ApplicationProperties;
-import com.cmccarthy.utils.PropertyLoader;
 import cucumber.api.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
-@Service
+@Component
+@Qualifier("webDriverService")
 public class WebDriverService extends EventFiringWebDriver {
 
-    @Autowired
-    ApplicationProperties applicationProperties;
-
     private static final WebDriver REAL_DRIVER = createDriver();
+
+    public WebDriverService() {
+        super(REAL_DRIVER);
+    }
+
     private static final Thread CLOSE_THREAD = new Thread() {
         @Override
         public void run() {
@@ -32,17 +30,11 @@ public class WebDriverService extends EventFiringWebDriver {
     };
 
     private static WebDriver createDriver() {
-        String driverName = System.getProperties().getProperty("spring.profiles.active");
-        System.out.println("driverName = " + driverName);
-        String driverName2 = System.getProperties().getProperty("browser");
-        System.out.println("browser = " + driverName2);
-        String driverName3 = PropertyLoader.loadProperty("browser");
-        System.out.println("browser = " + driverName3);
-        driverName = "firefox";
+        String driverName = "firefox";
         final WebDriver driver;
         switch (driverName.toLowerCase()) {
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"/src/test/resources/geckodriver");
+                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/test/resources/geckodriver");
                 FirefoxOptions capabilities = new FirefoxOptions();
                 driver = new FirefoxDriver(capabilities);
                 break;
@@ -57,10 +49,6 @@ public class WebDriverService extends EventFiringWebDriver {
 
     static {
         Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
-    }
-
-    public WebDriverService() {
-        super(REAL_DRIVER);
     }
 
     @Override
