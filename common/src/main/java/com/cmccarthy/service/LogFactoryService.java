@@ -15,7 +15,7 @@ public class LogFactoryService {
     public void createNewLogger(String featureName) {
         Logger log = Logger.getLogger("Thread" + featureName);
         Properties props = new Properties();
-
+        props.setProperty("log4j.rootLogger", "info");
         props.setProperty("log4j.appender.file", "org.apache.log4j.RollingFileAppender");
         props.setProperty("log4j.appender.file.maxFileSize", "100MB");
         props.setProperty("log4j.appender.file.Append", "false");
@@ -27,7 +27,6 @@ public class LogFactoryService {
         props.setProperty("log4j.appender.stdout", "org.apache.log4j.ConsoleAppender");
         props.setProperty("log4j.appender.stdout.Target", "System.out");
         props.setProperty("log4j.logger." + "Thread" + featureName, "INFO, file");
-        // props.setProperty("log4j.logger.LoadHandler","DEBUG, file");
         PropertyConfigurator.configure(props);
         logFactory.set(log);
     }

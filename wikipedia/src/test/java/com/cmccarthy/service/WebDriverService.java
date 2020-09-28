@@ -1,33 +1,27 @@
-package com.cmccarthy.webdriver;
+package com.cmccarthy.service;
 
+import com.cmccarthy.utils.ApplicationProperties;
+import com.cmccarthy.utils.PropertyLoader;
 import cucumber.api.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-/**
- * <p>
- * Example of a WebDriver implementation that has delegates all methods to a static instance (REAL_DRIVER) that is only
- * created once for the duration of the JVM. The REAL_DRIVER is automatically closed when the JVM exits. This makes
- * scenarios a lot faster since opening and closing a browser for each scenario is pretty slow.
- * To prevent browser state from leaking between scenarios, cookies are automatically deleted before every scenario.
- * </p>
- * <p>
- * A new instance of SharedDriver is created for each Scenario and passed to yor Stepdef classes via Dependency Injection
- * </p>
- * <p>
- * A new instance of the SharedDriver is created for each Scenario and then passed to the Step Definition classes'
- * constructor. They all receive a reference to the same instance. However, the REAL_DRIVER is the same instance throughout
- * the life of the JVM.
- * </p>
- */
 @Service
-public class SharedDriverService extends EventFiringWebDriver {
+public class WebDriverService extends EventFiringWebDriver {
+
+    @Autowired
+    ApplicationProperties applicationProperties;
 
     private static final WebDriver REAL_DRIVER = createDriver();
     private static final Thread CLOSE_THREAD = new Thread() {
@@ -37,16 +31,20 @@ public class SharedDriverService extends EventFiringWebDriver {
         }
     };
 
-//    @Bean
     private static WebDriver createDriver() {
-        String driverName = System.getProperty("browser");
+        String driverName = System.getProperties().getProperty("spring.profiles.active");
         System.out.println("driverName = " + driverName);
+        String driverName2 = System.getProperties().getProperty("browser");
+        System.out.println("browser = " + driverName2);
+        String driverName3 = PropertyLoader.loadProperty("browser");
+        System.out.println("browser = " + driverName3);
         driverName = "firefox";
         final WebDriver driver;
         switch (driverName.toLowerCase()) {
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", Objects.requireNonNull(SharedDriverService.class.getClassLoader().getResource("geckodriver")).getPath());
-                driver = new FirefoxDriver();
+                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"/src/test/resources/geckodriver");
+                FirefoxOptions capabilities = new FirefoxOptions();
+                driver = new FirefoxDriver(capabilities);
                 break;
             case "chrome":
                 driver = new ChromeDriver();
@@ -61,7 +59,7 @@ public class SharedDriverService extends EventFiringWebDriver {
         Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
     }
 
-    public SharedDriverService() {
+    public WebDriverService() {
         super(REAL_DRIVER);
     }
 

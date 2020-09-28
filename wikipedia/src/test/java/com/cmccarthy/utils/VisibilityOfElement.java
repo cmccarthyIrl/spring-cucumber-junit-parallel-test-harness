@@ -1,4 +1,4 @@
-package com.cmccarthy.applogic;
+package com.cmccarthy.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;

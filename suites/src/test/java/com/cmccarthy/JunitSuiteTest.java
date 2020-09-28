@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        WeatherRunnerTest.class
+        WeatherRunnerTest.class,
+        WikipediaRunnerTest.class
 })
 public class JunitSuiteTest {
 }

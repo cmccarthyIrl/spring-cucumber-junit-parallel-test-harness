@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertTrue;
 
-public class WikipediaPageSteps extends AbstractTestDefinition{
+public class WikipediaPageSteps extends AbstractTestDefinition {
 
     @Autowired
     private LogFactoryService logFactoryService;
@@ -18,7 +18,7 @@ public class WikipediaPageSteps extends AbstractTestDefinition{
 
     @Given("^The user has open the Wikipedia Homepage : (.*)$")
     public void userIsOpenMainPage(String url) {
-       logFactoryService.getLogger().info("Step start: user is open main page");
+        logFactoryService.getLogger().info("Step start: user is open main page");
         wikipediaPage.open(url);
         assertTrue("Main Page should be opened", wikipediaPage.isPageOpened());
     }

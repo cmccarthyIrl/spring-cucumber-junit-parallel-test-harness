@@ -10,7 +10,7 @@ public class WikipediaPage extends AbstractPage {
     @FindBy(id = "searchbar")
     private WebElement searchBarElement;
 
-    public void open(String url){
+    public void open(String url) {
         openAt(url);
     }
 

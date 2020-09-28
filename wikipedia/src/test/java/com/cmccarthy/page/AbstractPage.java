@@ -1,9 +1,9 @@
 package com.cmccarthy.page;
 
-import com.cmccarthy.applogic.InvisibilityOfElement;
-import com.cmccarthy.applogic.VisibilityOfElement;
-import com.cmccarthy.applogic.VisibilityOfElementLocated;
-import com.cmccarthy.webdriver.SharedDriverService;
+import com.cmccarthy.service.WebDriverService;
+import com.cmccarthy.utils.InvisibilityOfElement;
+import com.cmccarthy.utils.VisibilityOfElement;
+import com.cmccarthy.utils.VisibilityOfElementLocated;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +19,7 @@ import javax.annotation.PostConstruct;
 public abstract class AbstractPage {
 
     @Autowired
-    private SharedDriverService driver;
+    private WebDriverService driver;
 
     private Wait<WebDriver> wait;
 

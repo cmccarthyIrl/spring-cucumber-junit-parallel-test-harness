@@ -14,14 +14,14 @@ public class Hooks extends AbstractTestDefinition {
 
     @Before
     public void beforeScenario(Scenario scenario) {
-        hooksService.createLogger(hooksService.getFeatureFileName(scenario));
+        String scenarioName = hooksService.getFeatureFileName(scenario);
+        hooksService.createLogger(scenarioName);
     }
 
     @After
     public void afterScenario() {
         hooksService.endOfTest();
     }
-
 
 
 }

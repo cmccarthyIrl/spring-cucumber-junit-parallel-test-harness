@@ -46,6 +46,8 @@
         <cucumber.version>1.2.5</cucumber.version>
         <assertj-core.version>3.11.1</assertj-core.version>
         <java.version>1.8</java.version>
+        <selenium-version>3.8.1</selenium-version>
+        <browser>firefox</browser>
         <restassured.version>3.0.0</restassured.version>
         <surfire.plugin.version>3.0.0-M5</surfire.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
@@ -107,13 +109,24 @@
             <artifactId>spring-test</artifactId>
         </dependency>
 
-        <!--test dependencies-->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${selenium-version}</version>
+        </dependency>
+
+        <!--test dependencies-->
+<!--        <dependency>-->
+<!--            <groupId>junit</groupId>-->
+<!--            <artifactId>junit</artifactId>-->
+<!--            <version>4.11</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -180,8 +193,15 @@
             </properties>
         </profile>
     </profiles>
+
+
     <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -208,6 +228,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surfire.plugin.version}</version>
+                    <configuration>
+                        <skipAfterFailureCount>1</skipAfterFailureCount>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
