@@ -1,5 +1,6 @@
 package com.cmccarthy.service;
 
+import com.cmccarthy.utils.PropertyLoader;
 import cucumber.api.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,7 +31,7 @@ public class WebDriverService extends EventFiringWebDriver {
     };
 
     private static WebDriver createDriver() {
-        String driverName = "firefox";
+        String driverName = PropertyLoader.loadProperty("browser");
         final WebDriver driver;
         switch (driverName.toLowerCase()) {
             case "firefox":
