@@ -29,7 +29,7 @@ public class WeatherService {
         final Response response = restService.getRequestSpecification()
                 .param("q", location)
                 .param("appid", "0a1b11f110d4b6cd43181d23d724cb94")
-                .get(applicationProperties.getBaseUrl());
+                .get(applicationProperties.getWeatherAppUrl());
 
         managedResponses.put("class", response.as(LocationWeatherRootResponse.class));
         responseManagerService.setGetResponseThread(managedResponses);
