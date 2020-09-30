@@ -1,0 +1,32 @@
+sudo: false
+
+os: linux
+
+dist: trusty
+
+before_install:
+  - sudo apt-get update
+
+addons:
+  firefox: latest
+
+language: java
+
+jdk:
+  - oraclejdk8
+
+before_script:
+  - chmod +x $TRAVIS_BUILD_DIR/common/src/main/resources/travis-setup.sh
+  - bash $TRAVIS_BUILD_DIR/common/src/main/resources/travis-setup.sh
+
+cache:
+  directories:
+    - $HOME/.m2
+
+jobs:
+  include:
+    - stage: test
+      script: mvn clean install
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
