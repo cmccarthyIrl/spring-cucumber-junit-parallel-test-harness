@@ -1,11 +1,12 @@
-package com.cmccarthy.service;
+package com.cmccarthy.utils;
 
+import com.cmccarthy.service.LogFactoryService;
 import cucumber.api.Scenario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HooksService {
+public class HookUtils {
 
     @Autowired
     private LogFactoryService logFactoryService;

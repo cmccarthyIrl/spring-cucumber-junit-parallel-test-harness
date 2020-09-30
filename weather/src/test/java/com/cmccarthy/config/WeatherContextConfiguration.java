@@ -11,6 +11,6 @@ import org.springframework.retry.annotation.EnableRetry;
         "com.cmccarthy"
 })
 @PropertySource("classpath:/application.properties")
-public class FrameworkContextConfiguration {
+public class WeatherContextConfiguration {
 
 }
