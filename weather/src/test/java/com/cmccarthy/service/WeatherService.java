@@ -23,7 +23,6 @@ public class WeatherService {
     @Autowired
     private LogFactoryService logFactoryService;
 
-
     public void getWeatherForLocation(String location) {
         final Map<String, Object> managedResponses = new HashMap<>();
         final Response response = restService.getRequestSpecification()
@@ -38,6 +37,5 @@ public class WeatherService {
             logFactoryService.getLogger().info("Could not retrieve the weather forecast from the Response");
             throw new NoSuchElementException("Could not retrieve the weather forecast from the Response");
         }
-        logFactoryService.getLogger().info("The User searched the Open Weather app for the forecast for : " + location);
     }
 }

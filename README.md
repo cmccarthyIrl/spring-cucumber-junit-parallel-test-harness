@@ -45,21 +45,80 @@
     
 # Maven
 
-The Framework uses [Spring Boot Test](https://spring.io/guides/gs/testing-web/) client implementations.
+The Framework uses [Spring Boot Test](https://spring.io/guides/gs/testing-web/), [Cucumber](https://cucumber.io/), [Rest Assured](https://rest-assured.io/) and [Selenium](https://www.selenium.dev/) client implementations.
 
-You need two `<dependencies>`:
+You need three Spring `<dependencies>`:
 
 ```xml
 <dependecies>
     ...
-    <dependency>
-        <groupId>org.springFramework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springFramework</groupId>
-        <artifactId>spring-test</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>${spring-rabbit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+    ...
+</dependecies>
+```
+
+You need four Cucumber & Rest Assured `<dependencies>`:
+
+```xml
+<dependecies>
+    ...
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${restassured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>gherkin</artifactId>
+            <version>2.12.2</version>
+            <scope>provided</scope>
+        </dependency>
+    ...
+</dependecies>
+```
+
+You need two Selenium `<dependencies>`:
+
+```xml
+<dependecies>
+    ...
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${selenium-version}</version>
+        </dependency>
     ...
 </dependecies>
 ```
@@ -109,9 +168,11 @@ By using the [JUnit Framework](https://junit.org/junit4/) `@Suites` Annotation T
 ```java
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        WeatherTest.class
+        WeatherRunnerTest.class,
+        WikipediaRunnerTest.class
 })
-public class JunitSuiteTest{}
+public class JunitSuiteTest {
+}
 ```
 
 # Command Line 

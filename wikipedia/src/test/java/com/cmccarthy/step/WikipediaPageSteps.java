@@ -18,10 +18,10 @@ public class WikipediaPageSteps extends AbstractTestDefinition {
     @Autowired
     private WikipediaPage wikipediaPage;
 
-    @Given("^The user has open the Wikipedia Homepage$")
+    @Given("^The user has opened the Wikipedia Homepage$")
     public void userIsOpenMainPage() {
-        logFactoryService.getLogger().info("Step start: user is open main page");
+        logFactoryService.getLogger().info("Step start: The user has opened the Wikipedia Homepage");
         wikipediaPage.open(applicationProperties.getWikipediaUrl());
-        assertTrue("Main Page should be opened", wikipediaPage.isPageOpened());
+        assertTrue("Wikipedia Homepage should be opened", wikipediaPage.isPageOpened());
     }
 }

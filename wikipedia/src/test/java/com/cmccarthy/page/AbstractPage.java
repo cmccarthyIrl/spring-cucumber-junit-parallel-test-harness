@@ -28,6 +28,12 @@ public abstract class AbstractPage {
 
     private WebDriver driver;
     private Wait<WebDriver> wait;
+    private final Thread CLOSE_THREAD = new Thread() {
+        @Override
+        public void run() {
+            driver.close();
+        }
+    };
 
     @PostConstruct
     public void init() {
@@ -36,13 +42,6 @@ public abstract class AbstractPage {
         wait = new WebDriverWait(driver, 10, 500);
         Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
     }
-
-    private final Thread CLOSE_THREAD = new Thread() {
-        @Override
-        public void run() {
-            driver.close();
-        }
-    };
 
     private WebDriver createDriver() {
         final WebDriver driver;

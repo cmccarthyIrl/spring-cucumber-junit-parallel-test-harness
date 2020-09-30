@@ -3,10 +3,11 @@ package com.cmccarthy.service;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Properties;
 
-@Component
+@Service
 public class LogFactoryService {
 
     private static final ThreadLocal<Logger> logFactory = new ThreadLocal<>();
