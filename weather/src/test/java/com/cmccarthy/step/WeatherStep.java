@@ -31,6 +31,7 @@ public class WeatherStep extends AbstractTestDefinition {
 
     @Given("^The user has requested the weather for (.*)$")
     public void theUserHasRequestedTheWeatherForDublin(String location) {
+        logFactoryService.getLogger().info("The user makes an request for the weather in : " + location);
         weatherService.getWeatherForLocation(location);
     }
 }
