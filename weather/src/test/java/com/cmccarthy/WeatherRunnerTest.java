@@ -12,8 +12,7 @@ import java.util.Objects;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {
-                "html:target/cucumber-html-reports",
-                "json:target/cucumber-json-report.json",
+                "pretty",
                 "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"
         },
         glue = {"com/cmccarthy/step",
