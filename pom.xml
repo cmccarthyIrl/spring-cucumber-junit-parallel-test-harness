@@ -52,7 +52,7 @@
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <spring-rabbit.version>1.7.3.RELEASE</spring-rabbit.version>
         <org.json.version>20160810</org.json.version>
-        <log4j.version>2.13.1</log4j.version>
+        <log4j.version>2.13.2</log4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
