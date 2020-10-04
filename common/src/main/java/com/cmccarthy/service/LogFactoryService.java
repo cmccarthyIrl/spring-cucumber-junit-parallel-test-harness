@@ -3,7 +3,6 @@ package com.cmccarthy.service;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Appender;
-import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class LogFactoryService {
 
-
     private static final ThreadLocal<Logger> logFactory = new ThreadLocal<>();
     private String tempFeatureFileName = "";
 
@@ -27,27 +25,26 @@ public class LogFactoryService {
     private final static String MAX_BACKUP_INDEX = "100";
 
     public void createNewLogger(String featureName) {
-        LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
-        Configuration config = ctx.getConfiguration();
+        final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+        final Configuration config = ctx.getConfiguration();
         ctx.start(config);
         ctx.updateLoggers(config);
-        Logger logger = ctx.getLogger("Thread" + featureName);
-        logger.addAppender(addFileAppender(config, "fileAppender", featureName));
-        logger.addAppender(addConsoleAppender("consoleAppender"));
+        final Logger logger = ctx.getLogger("Thread" + featureName);
+        logger.addAppender(addFileAppender(config, featureName));
+        logger.addAppender(addConsoleAppender());
         Configurator.setLevel(logger.getName(), Level.INFO);
 
         logFactory.set(logger);
     }
 
-    private Appender addFileAppender(Configuration config, String appenderName, String featureName) {
-        final Layout layout = PatternLayout.newBuilder()
-                .withConfiguration(config)
-                .withPattern(PATTERN).build();
-        RollingFileAppender appender = RollingFileAppender.newBuilder()
+    private Appender addFileAppender(Configuration config, String featureName) {
+        final RollingFileAppender appender = RollingFileAppender.newBuilder()
                 .withFileName("logs/" + featureName + ".log")
-                .setName(appenderName)
+                .setName("fileAppender")
                 .withFilePattern(featureName + "%i.log")
-                .setLayout(layout)
+                .setLayout(PatternLayout.newBuilder()
+                        .withConfiguration(config)
+                        .withPattern(PATTERN).build())
                 .withPolicy(SizeBasedTriggeringPolicy.createPolicy(MAX_FILE_SIZE))
                 .withStrategy(DefaultRolloverStrategy.newBuilder().withMax(MAX_BACKUP_INDEX).build())
                 .withAppend(false)
@@ -57,9 +54,10 @@ public class LogFactoryService {
         return appender;
     }
 
-    private Appender addConsoleAppender(String appenderName) {
+    private Appender addConsoleAppender() {
         ConsoleAppender appender = ConsoleAppender.newBuilder()
-                .setName(appenderName)
+                .setName("consoleAppender")
+                .setLayout(PatternLayout.newBuilder().withPattern(PATTERN).build())
                 .withImmediateFlush(true)
                 .build();
 
