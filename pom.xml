@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>spring-cucumber-test-harness</artifactId>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <groupId>org.apache.maven.plugins</groupId>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <version>${surfire.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+    <dependencies>
+
+        <!--needs to be here-->
+        <dependency>
+            <artifactId>json</artifactId>
+            <groupId>org.json</groupId>
+            <version>${org.json.version}</version>
+        </dependency>
+
+        <!--  Cucumber dependencies-->
+        <dependency>
+            <artifactId>rest-assured</artifactId>
+            <groupId>io.rest-assured</groupId>
+            <version>${restassured.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>cucumber-java8</artifactId>
+            <groupId>io.cucumber</groupId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>cucumber-spring</artifactId>
+            <groupId>io.cucumber</groupId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>cucumber-junit</artifactId>
+            <groupId>io.cucumber</groupId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>extentreports-cucumber4-adapter</artifactId>
+            <groupId>com.aventstack</groupId>
+            <version>1.2.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>cucumber-java</artifactId>
+                    <groupId>io.cucumber</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cucumber-core</artifactId>
+                    <groupId>io.cucumber</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--test dependencies-->
+        <dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>commons-io</groupId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <artifactId>log4j-api</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>log4j-core</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>assertj-core</artifactId>
+            <groupId>org.assertj</groupId>
+            <version>${assertj-core.version}</version>
+        </dependency>
+
+        <!--spring dependencies-->
+        <dependency>
+            <artifactId>spring-rabbit</artifactId>
+            <groupId>org.springframework.amqp</groupId>
+            <version>${spring-rabbit.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>android-json</artifactId>
+                    <groupId>com.vaadin.external.google</groupId>
+                </exclusion>
+            </exclusions>
+            <groupId>org.springframework.boot</groupId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <artifactId>spring-test</artifactId>
+            <groupId>org.springframework</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>spring-aspects</artifactId>
+            <groupId>org.springframework</groupId>
+        </dependency>
+
+
+        <!--needs to be here-->
+        <dependency>
+            <artifactId>jtidy</artifactId>
+            <groupId>net.sf.jtidy</groupId>
+            <version>r938</version>
+        </dependency>
+    </dependencies>
+    <developers>
+        <developer>
+            <email>https://github.com/cmccarthyIrl</email>
+            <id>cmccarthy</id>
+            <name>cmccarthy</name>
+            <roles>
+                <role>Java Automation Engineer</role>
+            </roles>
+        </developer>
+    </developers>
+    <groupId>spring-cucumber-test-harness</groupId>
+
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>common</module>
+        <module>weather</module>
+        <module>suites</module>
+        <module>wikipedia</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>2.3.3.RELEASE</version>
+    </parent>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>qa</id>
+            <properties>
+                <activatedProperties>qa</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>icon-uat</id>
+            <properties>
+                <activatedProperties>icon-uat</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
+    <properties>
+        <activeProfile>prod</activeProfile>
+        <assertj-core.version>3.16.1</assertj-core.version>
+        <compiler.plugin.version>3.8.1</compiler.plugin.version>
+        <cucumber.version>4.8.1</cucumber.version>
+        <java.version>1.8</java.version>
+        <log4j.version>2.13.2</log4j.version>
+        <org.json.version>20160810</org.json.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <restassured.version>3.3.0</restassured.version>
+        <selenium-version>3.141.59</selenium-version>
+        <spring-rabbit.version>2.2.10.RELEASE</spring-rabbit.version>
+        <surfire.plugin.version>3.0.0-M5</surfire.plugin.version>
+    </properties>
+
+    <version>1.0-SNAPSHOT</version>
+</project>

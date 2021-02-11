@@ -1,0 +1,25 @@
+sudo: false
+
+os: linux
+#dist: focal
+#group: edge
+#arch: arm64-graviton2
+#compiler: clang
+#script:
+#  - clang --version
+dist: xenial
+
+addons:
+  chrome: stable
+
+language: java
+
+cache:
+  directories:
+    - $HOME/.m2
+
+jobs:
+  include:
+    - stage: test
+      script: mvn clean install -fae
+
