@@ -1,5 +1,6 @@
 # Spring Cucumber Test Harness
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/544aae36f927441ebe786fd5ce7a092b)](https://app.codacy.com/gh/cmccarthyIrl/spring-cucumber-junit-test-harness?utm_source=github.com&utm_medium=referral&utm_content=cmccarthyIrl/spring-cucumber-junit-test-harness&utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.com/cmccarthyIrl/spring-cucumber-junit-test-harness.svg?branch=master)](https://travis-ci.com/cmccarthyIrl/spring-cucumber-junit-test-harness) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6e4bd0bef1b5467aaaed6bc70a8ca2ae)](https://www.codacy.com/gh/cmccarthyIrl/spring-cucumber-test-harness/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cmccarthyIrl/spring-cucumber-test-harness&amp;utm_campaign=Badge_Grade)
 
 # Index
