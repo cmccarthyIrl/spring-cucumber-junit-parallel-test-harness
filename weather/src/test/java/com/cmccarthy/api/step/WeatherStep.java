@@ -21,10 +21,8 @@ public class WeatherStep {
     @Then("The weather for (.*) should be returned")
     public void theWeatherForDublinShouldBeReturned(String location) {
         final SoftAssertions softAssertions = new SoftAssertions();
-        final LocationWeatherRootResponse locationWeatherRootResponse = (LocationWeatherRootResponse) stepDefinitionDataManager
-                .getStoredObjectMap().get("class");
-        logger.info("Verifying the Response location : " + locationWeatherRootResponse.getName()
-                + ", is equal to the expected location : " + location);
+        final LocationWeatherRootResponse locationWeatherRootResponse = (LocationWeatherRootResponse) stepDefinitionDataManager.getStoredObjectMap().get("class");
+        logger.info("Verifying the Response location : " + locationWeatherRootResponse.getName() + ", is equal to the expected location : " + location);
 
         softAssertions.assertThat(locationWeatherRootResponse.getName())
                 .as("Expected the weather forecast to be for : " + location)
