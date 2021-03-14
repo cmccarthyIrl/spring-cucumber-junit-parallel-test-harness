@@ -8,10 +8,10 @@ import io.cucumber.datatable.TableEntryByTypeTransformer;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class Transformer implements ParameterByTypeTransformer, TableEntryByTypeTransformer,
+class Transformer implements ParameterByTypeTransformer, TableEntryByTypeTransformer,
         TableCellByTypeTransformer {
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public Object transform(String s, Type type) {
         return objectMapper.convertValue(s, objectMapper.constructType(type));

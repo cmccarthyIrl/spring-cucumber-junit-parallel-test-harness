@@ -18,6 +18,6 @@ public class CommonPageSteps extends AbstractStep {
     public void theUserShouldBeOnTheCommonPage() {
         logger.info("The Wikipedia Common page should be opened");
         assertTrue("Wikipedia Common page should be opened",
-                isElementDisplayed(wikipediaCommonPage.getCENTRAL_LOGO()));
+                isElementDisplayed(wikipediaCommonPage.getCentralLogo()));
     }
 }

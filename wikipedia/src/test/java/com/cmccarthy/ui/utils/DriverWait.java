@@ -1,6 +1,11 @@
 package com.cmccarthy.ui.utils;
 
-import com.cmccarthy.ui.utils.expectedConditions.*;
+import com.cmccarthy.ui.utils.expectedConditions.ClickabilityOfElement;
+import com.cmccarthy.ui.utils.expectedConditions.ClickabilityOfElementByLocator;
+import com.cmccarthy.ui.utils.expectedConditions.InvisibilityOfElement;
+import com.cmccarthy.ui.utils.expectedConditions.InvisibilityOfElementByLocator;
+import com.cmccarthy.ui.utils.expectedConditions.VisibilityOfElement;
+import com.cmccarthy.ui.utils.expectedConditions.VisibilityOfElementByLocator;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ScriptTimeoutException;
