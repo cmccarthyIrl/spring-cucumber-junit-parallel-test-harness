@@ -197,7 +197,7 @@
         <profile>
             <id>icon-uat</id>
             <properties>
-                <activatedProperties>icon-uat</activatedProperties>
+                <activatedProperties>uat</activatedProperties>
             </properties>
         </profile>
         <profile>

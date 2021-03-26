@@ -13,14 +13,11 @@ public class HookUtil {
     private final Logger log = LoggerFactory.getLogger(HookUtil.class);
 
     public void endOfTest(Scenario scenario) {
-
-        if (scenario.getStatus() != null) {
-            if (scenario.isFailed()) {
-                String filename = scenario.getName().replaceAll("\\s+", "_");
-                final String featureError = scenario.getId().replaceAll("\\s+", "_").replaceAll(":", "_").split("\\.")[1];
-                filename = filename + "_" + featureError;
-                scenario.embed(filename.getBytes(StandardCharsets.UTF_8), "image/png", filename);
-            }
+        if (scenario.getStatus() != null && scenario.isFailed()) {
+            String filename = scenario.getName().replaceAll("\\s+", "_");
+            final String featureError = scenario.getId().replaceAll("\\s+", "_").replaceAll(":", "_").split("\\.")[1];
+            filename = filename + "_" + featureError;
+            scenario.embed(filename.getBytes(StandardCharsets.UTF_8), "image/png", filename);
         }
 
         log.info("");
