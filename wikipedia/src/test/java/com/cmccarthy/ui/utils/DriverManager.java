@@ -26,8 +26,6 @@ public class DriverManager {
 
     @Autowired
     private void setLocalWebDriver() {
-
-        System.out.println("apples = " + System.getProperty("USER"));
         System.setProperty("webdriver.chrome.driver", "../common/src/main/resources/chromedriver");
 
         final ChromeOptions chromeOptions = new ChromeOptions();
