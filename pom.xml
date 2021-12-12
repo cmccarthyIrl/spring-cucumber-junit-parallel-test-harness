@@ -175,11 +175,12 @@
             <version>${allure.version}</version>
         </dependency>
 
-        <!--test dependencies-->
+        <!--test dependencies -->
         <dependency>
             <artifactId>commons-io</artifactId>
             <groupId>commons-io</groupId>
             <version>2.11.0</version>
+        </dependency>
         <dependency>
             <artifactId>assertj-core</artifactId>
             <groupId>org.assertj</groupId>
