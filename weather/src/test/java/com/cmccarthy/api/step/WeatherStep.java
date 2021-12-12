@@ -18,7 +18,7 @@ public class WeatherStep {
     @Autowired
     private StepDefinitionDataManager stepDefinitionDataManager;
 
-    @Then("The weather for (.*) should be returned")
+    @Then("^The weather for (.*) should be returned$")
     public void theWeatherForDublinShouldBeReturned(String location) {
         final SoftAssertions softAssertions = new SoftAssertions();
         final LocationWeatherRootResponse locationWeatherRootResponse = (LocationWeatherRootResponse) stepDefinitionDataManager.getStoredObjectMap().get("class");
@@ -31,7 +31,7 @@ public class WeatherStep {
         softAssertions.assertAll();
     }
 
-    @Given("The user has requested the weather for (.*)")
+    @Given("^The user has requested the weather for (.*)$")
     public void theUserHasRequestedTheWeatherForDublin(String location) {
         logger.info("The user makes an request for the weather in : " + location);
         weatherService.getWeatherForLocation(location);

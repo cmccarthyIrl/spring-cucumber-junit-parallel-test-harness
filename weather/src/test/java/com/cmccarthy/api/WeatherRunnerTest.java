@@ -9,9 +9,8 @@ import org.junit.runner.RunWith;
         plugin = {
                 "pretty",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+                "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm",
                 "json:target/cucumber-report.json"
-        },
-        glue = {"com/cmccarthy/api/", "com/cmccarthy/common/"
         },
         features = {"classpath:feature/WeatherTest.feature"}
 )
