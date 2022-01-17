@@ -9,7 +9,7 @@
                 <artifactId>maven-remote-resources-plugin</artifactId>
                 <configuration>
                     <resourceBundles>
-                        <resourceBundle>spring-cucumber-test-harness:common:1.0-SNAPSHOT</resourceBundle>
+                        <resourceBundle>spring-cucumber-junit-parallel-test-harness:common:1.0-SNAPSHOT</resourceBundle>
                     </resourceBundles>
                 </configuration>
                 <executions>
@@ -28,7 +28,7 @@
     <dependencies>
         <dependency>
             <artifactId>weather</artifactId>
-            <groupId>spring-cucumber-test-harness</groupId>
+            <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
             <scope>test</scope>
             <type>test-jar</type>
             <version>1.0-SNAPSHOT</version>
@@ -36,7 +36,7 @@
 
         <dependency>
             <artifactId>wikipedia</artifactId>
-            <groupId>spring-cucumber-test-harness</groupId>
+            <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
             <scope>test</scope>
             <type>test-jar</type>
             <version>1.0-SNAPSHOT</version>
@@ -44,7 +44,7 @@
 
         <dependency>
             <artifactId>common</artifactId>
-            <groupId>spring-cucumber-test-harness</groupId>
+            <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
             <type>test-jar</type>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -52,8 +52,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>spring-cucumber-test-harness</artifactId>
-        <groupId>spring-cucumber-test-harness</groupId>
+        <artifactId>spring-cucumber-junit-parallel-test-harness</artifactId>
+        <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <version>1.0-SNAPSHOT</version>

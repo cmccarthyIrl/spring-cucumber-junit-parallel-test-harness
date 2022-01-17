@@ -26,8 +26,8 @@
     </build>
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>spring-cucumber-test-harness</artifactId>
-        <groupId>spring-cucumber-test-harness</groupId>
+        <artifactId>spring-cucumber-junit-parallel-test-harness</artifactId>
+        <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
         <relativePath>../pom.xml</relativePath>
         <version>1.0-SNAPSHOT</version>
     </parent>
