@@ -135,11 +135,11 @@ cucumber.execution.parallel.config.strategy=fixed
 cucumber.execution.parallel.config.fixed.parallelism=5
 cucumber.plugin=io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:,pretty,json:target/cucumber/report.json,
 ```
-Right click the `WeatherTest` class and select `Run`
+Right click the `WeatherRunnerTest` or class and select `Run`
 
 ```java
 @Cucumber
-public class GoogleMapsRunnerTest {
+public class WeatherRunnerTest {
 }
 ```
 
@@ -153,7 +153,7 @@ Note that the `mvn test` command only runs test classes that follow the `*Test.j
 You can run a single test or a suite or tests like so :
 
 ```
-mvn test -Dtest=WeatherTest
+mvn test -Dtest=WeatherRunnerTest
 ```
 
 ```
@@ -229,7 +229,7 @@ properties to use etc
 @EnableRetry
 @Configuration
 @ComponentScan({
-        "com.cmccarthy"
+        "com.cmccarthy.ui","com.cmccarthy.common"
 })
 @PropertySource("application.properties")
 public class FrameworkContextConfiguration {
