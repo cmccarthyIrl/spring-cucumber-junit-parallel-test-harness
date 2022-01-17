@@ -77,36 +77,24 @@ Cucumber & Rest Assured `<dependencies>`:
 
 <dependecies>
     ...
-    <dependency>
-        <artifactId>cucumber-java8</artifactId>
-        <groupId>io.cucumber</groupId>
-        <version>${cucumber.version}</version>
-    </dependency>
-    <dependency>
-        <artifactId>cucumber-spring</artifactId>
-        <groupId>io.cucumber</groupId>
-        <version>${cucumber.version}</version>
-    </dependency>
-    <dependency>
-        <artifactId>cucumber-junit</artifactId>
-        <groupId>io.cucumber</groupId>
-        <version>${cucumber.version}</version>
-    </dependency>
-    <dependency>
-        <artifactId>extentreports-cucumber4-adapter</artifactId>
-        <groupId>com.aventstack</groupId>
-        <version>1.2.1</version>
-        <exclusions>
-            <exclusion>
-                <artifactId>cucumber-java</artifactId>
-                <groupId>io.cucumber</groupId>
-            </exclusion>
-            <exclusion>
-                <artifactId>cucumber-core</artifactId>
-                <groupId>io.cucumber</groupId>
-            </exclusion>
-        </exclusions>
-    </dependency>
+  <!--  Cucumber dependencies-->
+  <dependency>
+    <artifactId>rest-assured</artifactId>
+    <groupId>io.rest-assured</groupId>
+    <version>${restassured.version}</version>
+  </dependency>
+  <dependency>
+    <artifactId>cucumber-java</artifactId>
+    <groupId>io.cucumber</groupId>
+  </dependency>
+  <dependency>
+    <artifactId>cucumber-spring</artifactId>
+    <groupId>io.cucumber</groupId>
+  </dependency>
+  <dependency>
+    <artifactId>cucumber-junit-platform-engine</artifactId>
+    <groupId>io.cucumber</groupId>
+  </dependency>
     ...
 </dependecies>
 ```
@@ -314,20 +302,20 @@ To generate the above report navigate to the root directory of the module under 
 
 # Logging
 
-The Framework uses [Log4j2](https://logging.apache.org/log4j/2.x/) You can instantiate the logging service in any Class
+The Framework uses [Logback](https://logback.qos.ch/) You can instantiate the logging service in any Class
 like so
 
 ```java
-        private final Logger logger=LoggerFactory.getLogger(WikipediaPageSteps.class);
+private final Logger logger=LoggerFactory.getLogger(WikipediaPageSteps.class);
 ```
 
 you can then use the logger like so :
 
 ```java
-        logger.info("This is a info message");
-        logger.warn("This is a warning message");
-        logger.debug("This is a info message");
-        logger.error("This is a error message");
+logger.info("This is a info message");
+logger.warn("This is a warning message");
+logger.debug("This is a info message");
+logger.error("This is a error message");
 ```
 
 # Before / After Hooks
