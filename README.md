@@ -125,27 +125,20 @@ Selenium `<dependencies>`:
 - [Java JDK 11](https://jdk.java.net/java-se-ri/11)
 - [Apache Maven 3.6.3](https://maven.apache.org/docs/3.6.3/release-notes.html)
 
-# JUnit
+# JUnit 5
 
-By using the [JUnit Framework](https://junit.org/junit4/) `@RunWith` Annotation Type we can utilize
-the [Cucumber Framework](https://cucumber.io/) and the `@CucumberOptions` Annotation Type to execute the `*.feature`
-file tests
+By using the [JUnit Jupiter](https://junit.org/junit5/docs/current/user-guide/) and the [Cucumber JVM](https://cucumber.io/docs/installation/java/) `@Cucumber` Annotation Type we can specify our Cucumber Options like so :
 
-> Right click the `WeatherTest` class and select `Run`
+```properties
+cucumber.execution.parallel.enabled=true
+cucumber.execution.parallel.config.strategy=fixed
+cucumber.execution.parallel.config.fixed.parallelism=5
+cucumber.plugin=io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:,pretty,json:target/cucumber/report.json,
+```
+Right click the `WeatherTest` class and select `Run`
 
 ```java
-
-@RunWith(Cucumber.class)
-@CucumberOptions(
-        plugin = {
-                "pretty",
-                "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"
-        },
-        glue = {"com/cmccarthy/step",
-                "com/cmccarthy/utils"
-        },
-        features = {"classpath:feature/GoogleMapsTest.feature"}
-)
+@Cucumber
 public class GoogleMapsRunnerTest {
 }
 ```
