@@ -127,7 +127,7 @@ Selenium `<dependencies>`:
 
 # JUnit 5
 
-By using the [JUnit Jupiter](https://junit.org/junit5/docs/current/user-guide/) and the [Cucumber JVM](https://cucumber.io/docs/installation/java/) `@Cucumber` Annotation Type we can specify our Cucumber Options like so :
+By using the [JUnit](https://junit.org/junit5/docs/current/user-guide/) and the [Cucumber JVM](https://cucumber.io/docs/installation/java/) `@Cucumber` Annotation Type we can specify our Cucumber Options like so :
 
 ```properties
 cucumber.execution.parallel.enabled=true
