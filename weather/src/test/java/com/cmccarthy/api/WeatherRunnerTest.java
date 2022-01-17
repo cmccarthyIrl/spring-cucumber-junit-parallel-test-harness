@@ -1,19 +1,8 @@
 package com.cmccarthy.api;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
+import io.cucumber.junit.platform.engine.Cucumber;
 
-@RunWith(Cucumber.class)
-@CucumberOptions(
-        plugin = {
-                "pretty",
-                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-                "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm",
-                "json:target/cucumber-report.json"
-        },
-        features = {"classpath:feature/WeatherTest.feature"}
-)
+@Cucumber
 public class WeatherRunnerTest {
 
 }

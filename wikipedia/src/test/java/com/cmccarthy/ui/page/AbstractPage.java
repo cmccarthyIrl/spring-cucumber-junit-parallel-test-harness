@@ -10,7 +10,6 @@ import java.util.Arrays;
 @Component
 public abstract class AbstractPage {
 
-
     @Autowired
     private DriverManager driverManager;
 

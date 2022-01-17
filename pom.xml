@@ -12,7 +12,7 @@
             <id>cmccarthy</id>
             <name>cmccarthy</name>
             <roles>
-                <role>Java Automation Engineer</role>
+                <role>SDET</role>
             </roles>
         </developer>
     </developers>
@@ -43,14 +43,13 @@
 
     <properties>
         <activeProfile>prod</activeProfile>
-        <assertj-core.version>3.21.0</assertj-core.version>
+        <assertj-core.version>3.22.0</assertj-core.version>
         <aspectj.version>1.9.1</aspectj.version>
-        <allure.version>2.16.1</allure.version>
+        <allure.version>2.17.2</allure.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <cucumber.version>6.2.2</cucumber.version>
         <extentreports.version>2.8.4</extentreports.version>
         <java.version>11</java.version>
-        <log4j.version>2.13.2</log4j.version>
         <org.json.version>20160810</org.json.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -106,7 +105,7 @@
                 <plugin>
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
-                    <version>2.10.0</version>
+                    <version>${allure.version}</version>
                     <configuration>
                         <reportVersion>${allure.version}</reportVersion>
                         <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
@@ -121,6 +120,19 @@
             </resource>
         </resources>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-jvm</artifactId>
+                <version>${cucumber.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <!--needs to be here-->
@@ -139,17 +151,14 @@
         <dependency>
             <artifactId>cucumber-java</artifactId>
             <groupId>io.cucumber</groupId>
-            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <artifactId>cucumber-spring</artifactId>
             <groupId>io.cucumber</groupId>
-            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
-            <artifactId>cucumber-junit</artifactId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
             <groupId>io.cucumber</groupId>
-            <version>${cucumber.version}</version>
         </dependency>
 
         <!-- report Dependencies-->
@@ -158,16 +167,6 @@
             <groupId>tech.grasshopper</groupId>
             <artifactId>extentreports-cucumber6-adapter</artifactId>
             <version>${extentreports.version}</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>cucumber-java</artifactId>-->
-<!--                    <groupId>io.cucumber</groupId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>cucumber-core</artifactId>-->
-<!--                    <groupId>io.cucumber</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -197,25 +196,8 @@
         </dependency>
         <dependency>
             <artifactId>spring-boot-starter-web</artifactId>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>log4j-to-slf4j</artifactId>-->
-<!--                    <groupId>org.apache.logging.log4j</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
             <groupId>org.springframework.boot</groupId>
         </dependency>
-<!--        <dependency>-->
-<!--            <artifactId>spring-boot-starter-test</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>android-json</artifactId>-->
-<!--                    <groupId>com.vaadin.external.google</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -236,8 +218,6 @@
             <groupId>org.springframework</groupId>
         </dependency>
 
-
-
         <!--needs to be here-->
         <dependency>
             <artifactId>jtidy</artifactId>
@@ -245,7 +225,6 @@
             <version>r938</version>
         </dependency>
     </dependencies>
-
 
     <profiles>
         <profile>

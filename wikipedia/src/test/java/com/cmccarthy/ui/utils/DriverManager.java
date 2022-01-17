@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.Locale;
 
 @Component
@@ -17,19 +19,14 @@ public class DriverManager {
 
     private final ThreadLocal<ChromeDriver> driverThreadLocal = new ThreadLocal<>();
 
-    private ChromeDriver chromeDriver;
-
-    private final Thread CLOSE_THREAD = new Thread() {
-        @Override
-        public void run() {
-            logger.info("Quitting driver");
-            chromeDriver.quit();
+    public void createDriver() {
+        if (getDriver() == null) {
+            setLocalWebDriver();
         }
-    };
+    }
 
-    @Autowired
     private void setLocalWebDriver() {
-        System.setProperty("webdriver.chrome.driver", Constants.DRIVER_DIRECTORY + "/chromedriver" + getOSExtension());
+        System.setProperty("webdriver.chrome.driver", Constants.DRIVER_DIRECTORY + "/chromedriver" + getExtension());
 
         final ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("window-size=1920,1080");
@@ -42,33 +39,37 @@ public class DriverManager {
         chromeOptions.addArguments("--disable-dev-shm-usage");
         chromeOptions.addArguments("--no-sandbox");
 
-        chromeDriver = new ChromeDriver(chromeOptions);
+        ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
         driverThreadLocal.set(chromeDriver);
-        Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
     }
 
     public ChromeDriver getDriver() {
         return driverThreadLocal.get();
     }
 
-    public boolean checkIfDriverExists() {
-        File geckoDriver = new File(Constants.DRIVER_DIRECTORY + "/geckodriver" + getOSExtension());
-        File chromedriver = new File(Constants.DRIVER_DIRECTORY + "/geckodriver" + getOSExtension());
+    public boolean isDriverExisting() {
+        File geckoDriver = new File(Constants.DRIVER_DIRECTORY + "/geckodriver" + getExtension());
+        File chromedriver = new File(Constants.DRIVER_DIRECTORY + "/chromedriver" + getExtension());
         return geckoDriver.exists() && chromedriver.exists();
     }
 
     public void downloadDriver() {
-        System.out.println(" inside download driver ");
         try {
             Process process;
             if (getOperatingSystem().equals("win")) {
                 process = Runtime.getRuntime().exec("cmd.exe /c downloadDriver.sh", null,
                         new File(Constants.COMMON_RESOURCES));
             } else {
-                String filePath = Constants.COMMON_RESOURCES + "/downloadDriver.sh";
-                process = Runtime.getRuntime().exec(new String[]{"/bin/bash", "-c", filePath}, null);
+                process = Runtime.getRuntime().exec(
+                        new String[]{"sh", "-c", Constants.COMMON_RESOURCES + "/downloadDriver.sh"});
             }
             process.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = reader.readLine();
+            while (line != null) {
+                logger.debug(line);
+                line = reader.readLine();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,10 +86,10 @@ public class DriverManager {
         }
     }
 
-    private String getOSExtension() {
+    private String getExtension() {
         String extension = "";
         if (getOperatingSystem().contains("win")) {
-            return ".exe.";
+            return ".exe";
         }
         return extension;
     }
