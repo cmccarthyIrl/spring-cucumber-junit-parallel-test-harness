@@ -7,7 +7,8 @@ import io.cucumber.java.en.Given;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.junit.Assert.assertTrue;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
+
 
 public class WikipediaPageSteps extends AbstractStep {
 

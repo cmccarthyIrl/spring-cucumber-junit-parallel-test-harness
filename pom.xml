@@ -31,7 +31,6 @@
     <modules>
         <module>common</module>
         <module>weather</module>
-        <module>suites</module>
         <module>wikipedia</module>
     </modules>
 
@@ -56,9 +55,8 @@
         <restassured.version>3.3.0</restassured.version>
         <selenium-version>3.8.1</selenium-version>
         <spring-rabbit.version>2.3.9</spring-rabbit.version>
-        <surfire.plugin.version>2.22.2</surfire.plugin.version>
+        <surfire.plugin.version>3.0.0-M5</surfire.plugin.version>
     </properties>
-
 
     <build>
         <pluginManagement>
@@ -73,6 +71,7 @@
                     </configuration>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <executions>
                         <execution>
@@ -81,13 +80,17 @@
                             </goals>
                         </execution>
                     </executions>
-                    <groupId>org.apache.maven.plugins</groupId>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <groupId>org.apache.maven.plugins</groupId>
                     <version>${surfire.plugin.version}</version>
                     <configuration>
+                        <properties>
+                            <configurationParameters>
+                                cucumber.junit-platform.naming-strategy=long
+                            </configurationParameters>
+                        </properties>
                         <testFailureIgnore>false</testFailureIgnore>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <argLine>
@@ -185,7 +188,12 @@
             <groupId>org.assertj</groupId>
             <version>${assertj-core.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>1.8.2</version>
+            <scope>test</scope>
+        </dependency>
 
 
         <!--spring dependencies-->
@@ -213,11 +221,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <artifactId>spring-test</artifactId>
-            <groupId>org.springframework</groupId>
-        </dependency>
-
         <!--needs to be here-->
         <dependency>
             <artifactId>jtidy</artifactId>
