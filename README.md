@@ -127,7 +127,9 @@ Selenium `<dependencies>`:
 
 # JUnit 5
 
-By using the [JUnit](https://junit.org/junit5/docs/current/user-guide/) and the [Cucumber JVM](https://cucumber.io/docs/installation/java/) `@Cucumber` Annotation Type we can specify our Cucumber Options like so :
+By using the [JUnit](https://junit.org/junit5/docs/current/user-guide/) and
+the [Cucumber JVM](https://cucumber.io/docs/installation/java/) `@Cucumber` Annotation Type we can specify our Cucumber
+Options like so :
 
 ```properties
 cucumber.execution.parallel.enabled=true
@@ -135,6 +137,7 @@ cucumber.execution.parallel.config.strategy=fixed
 cucumber.execution.parallel.config.fixed.parallelism=5
 cucumber.plugin=io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:,pretty,json:target/cucumber/report.json,
 ```
+
 Right click the `WeatherRunnerTest` or class and select `Run`
 
 ```java
@@ -241,7 +244,8 @@ public class FrameworkContextConfiguration {
 There is only one thing you need to do to switch the environment - which is to set `<activeByDefault>` property in the
 Master POM.
 
-> By default, the value of `spring.profiles.active` is defined in the `application.properties` file which inherits its value from the Master POM property `<activeByDefault>`
+> By default, the value of `spring.profiles.active` is defined in the `application.properties` file which inherits its
+> value from the Master POM property `<activeByDefault>`
 
 ```xml
 

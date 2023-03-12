@@ -5,6 +5,13 @@
     <artifactId>common</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <artifactId>spring-cucumber-junit-parallel-test-harness</artifactId>
+        <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
     <build>
         <plugins>
             <plugin>
@@ -27,10 +34,5 @@
         </plugins>
     </build>
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <artifactId>spring-cucumber-junit-parallel-test-harness</artifactId>
-        <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
-        <relativePath>../pom.xml</relativePath>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+
 </project>

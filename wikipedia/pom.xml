@@ -34,13 +34,13 @@
         <dependency>
             <artifactId>ngwebdriver</artifactId>
             <groupId>com.paulhammant</groupId>
-            <version>1.0</version>
+            <version>1.2</version>
         </dependency>
 
         <dependency>
             <artifactId>selenium-java</artifactId>
             <groupId>org.seleniumhq.selenium</groupId>
-            <version>${selenium-version}</version>
+            <version>4.6.0</version>
         </dependency>
     </dependencies>
 

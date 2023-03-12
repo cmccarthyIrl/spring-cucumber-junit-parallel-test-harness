@@ -2,7 +2,6 @@ package com.cmccarthy.ui.utils;
 
 import com.cmccarthy.common.utils.HookUtil;
 import com.cmccarthy.ui.config.WikipediaAbstractTestDefinition;
-import com.cmccarthy.ui.utils.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -34,7 +33,7 @@ public class Hooks extends WikipediaAbstractTestDefinition {
 
     @After
     public void afterScenario(Scenario scenario) {
-        driverManager.getDriver().close();
+        driverManager.getDriver().quit();
         hookUtil.endOfTest(scenario);
     }
 }

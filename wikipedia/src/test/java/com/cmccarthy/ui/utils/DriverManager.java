@@ -4,7 +4,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -31,13 +30,14 @@ public class DriverManager {
         final ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("window-size=1920,1080");
 //        chromeOptions.addArguments("--headless");
-        chromeOptions.addArguments("-incognito");
-        chromeOptions.addArguments("start-maximized");
-        chromeOptions.addArguments("disable-infobars");
+        chromeOptions.addArguments("--incognito");
+//        chromeOptions.addArguments("start-maximized");
+//        chromeOptions.addArguments("disable-infobars");
         chromeOptions.addArguments("--disable-extensions");
-        chromeOptions.addArguments("--disable-gpu");
-        chromeOptions.addArguments("--disable-dev-shm-usage");
+//        chromeOptions.addArguments("--disable-gpu");
+//        chromeOptions.addArguments("--disable-dev-shm-usage");
         chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--remote-allow-origins=*");
 
         ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
         driverThreadLocal.set(chromeDriver);

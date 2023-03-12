@@ -1,7 +1,6 @@
 package com.cmccarthy.ui.utils.expectedConditions;
 
 import com.cmccarthy.ui.utils.Constants;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +30,7 @@ public class ClickabilityOfElement implements ExpectedCondition<WebElement> {
                         StaleElementReferenceException.class);
         try {
             return wait.until(ExpectedConditions.elementToBeClickable(element));
-        } catch (StaleElementReferenceException | NoSuchElementException | ElementNotVisibleException e) {
+        } catch (StaleElementReferenceException | NoSuchElementException e) {
             return element;
         } catch (Throwable t) {
             throw new Error(t);
