@@ -1,4 +1,4 @@
-name: run
+name: UI and API Tests
 
 on:
   pull_request:
