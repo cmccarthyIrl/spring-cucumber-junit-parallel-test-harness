@@ -3,7 +3,6 @@ package com.cmccarthy.ui.utils;
 import com.cmccarthy.ui.utils.expectedConditions.*;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;

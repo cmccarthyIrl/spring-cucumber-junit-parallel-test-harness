@@ -1,8 +1,10 @@
 name: run
 
 on:
-  pull_request:
+  push:
     branches: [ "feature/pipeline" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build:

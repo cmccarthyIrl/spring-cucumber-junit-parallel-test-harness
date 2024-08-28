@@ -39,7 +39,7 @@
     </parent>
 
     <properties>
-        <activeProfile>prod</activeProfile>
+        <activeProfile>headless-github</activeProfile>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <java.version>17</java.version>
         <resource.plugin.version>3.1.0</resource.plugin.version>

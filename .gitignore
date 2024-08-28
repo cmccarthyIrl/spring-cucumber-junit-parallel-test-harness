@@ -6,3 +6,5 @@ test-output/
 *.iml
 .allure
 
+/common/src/main/resources/drivers/chromedriver.exe
+/common/src/main/resources/drivers/geckodriver.exe
