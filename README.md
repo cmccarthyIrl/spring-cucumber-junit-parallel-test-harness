@@ -1,4 +1,4 @@
-# Spring Cucumber Junit Parallel Test Harness
+# Spring Cucumber JUnit Parallel Test Harness
 
 [![test](https://github.com/cmccarthyIrl/spring-cucumber-junit-parallel-test-harness/actions/workflows/test.yml/badge.svg)](https://github.com/cmccarthyIrl/spring-cucumber-junit-parallel-test-harness/actions/workflows/test.yml)
 # Index
