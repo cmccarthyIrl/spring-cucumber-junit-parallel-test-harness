@@ -253,6 +253,12 @@
                 <activatedProperties>cloud-provider</activatedProperties>
             </properties>
         </profile>
+        <profile>
+            <id>headless-github</id>
+            <properties>
+                <activatedProperties>headless-github</activatedProperties>
+            </properties>
+        </profile>
     </profiles>
 
 </project>
