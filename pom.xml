@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>spring-cucumber-junit-parallel-test-harness</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <developers>
+        <developer>
+            <email>https://github.com/cmccarthyIrl</email>
+            <id>cmccarthy</id>
+            <name>cmccarthy</name>
+        </developer>
+    </developers>
+    <groupId>spring-cucumber-junit-parallel-test-harness</groupId>
+
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>common</module>
+        <module>weather</module>
+        <module>wikipedia</module>
+    </modules>
+
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>3.3.3</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <activeProfile>headless-github</activeProfile>
+        <compiler.plugin.version>3.8.1</compiler.plugin.version>
+        <java.version>17</java.version>
+        <resource.plugin.version>3.1.0</resource.plugin.version>
+        <junit.platform.suite.version>1.11.0</junit.platform.suite.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <restassured.version>5.2.0</restassured.version>
+        <surfire.plugin.version>3.0.0-M5</surfire.plugin.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <version>${surfire.plugin.version}</version>
+                    <configuration>
+                        <properties>
+                            <configurationParameters>
+                                cucumber.junit-platform.naming-strategy=long
+                            </configurationParameters>
+                        </properties>
+                        <testFailureIgnore>false</testFailureIgnore>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-maven</artifactId>
+                    <version>2.10.0</version>
+                    <configuration>
+                        <reportVersion>2.10.0</reportVersion>
+                        <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.3.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <artifactId>json</artifactId>
+            <groupId>org.json</groupId>
+            <version>20231013</version>
+        </dependency>
+
+        <!--  Cucumber dependencies-->
+        <dependency>
+            <artifactId>rest-assured</artifactId>
+            <groupId>io.rest-assured</groupId>
+            <version>${restassured.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>cucumber-spring</artifactId>
+            <groupId>io.cucumber</groupId>
+            <version>7.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>${junit.platform.suite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <groupId>io.cucumber</groupId>
+            <version>7.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.8</version>
+        </dependency>
+        <!-- report Dependencies-->
+
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>1.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.21.0</version>
+        </dependency>
+
+        <!--test dependencies -->
+        <dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>commons-io</groupId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>assertj-core</artifactId>
+            <groupId>org.assertj</groupId>
+            <version>3.23.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>${junit.platform.suite.version}</version>
+        </dependency>
+
+        <!--spring dependencies-->
+        <dependency>
+            <artifactId>spring-rabbit</artifactId>
+            <groupId>org.springframework.amqp</groupId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>logback-classic</artifactId>
+                    <groupId>ch.qos.logback</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--needs to be here-->
+        <dependency>
+            <artifactId>jtidy</artifactId>
+            <groupId>net.sf.jtidy</groupId>
+            <version>r938</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>qa</id>
+            <properties>
+                <activatedProperties>qa</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <activatedProperties>uat</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>cloud-provider</id>
+            <properties>
+                <activatedProperties>cloud-provider</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>headless-github</id>
+            <properties>
+                <activatedProperties>headless-github</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
