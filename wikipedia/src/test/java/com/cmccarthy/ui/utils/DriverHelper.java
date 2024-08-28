@@ -91,7 +91,7 @@ public class DriverHelper {
     @Retryable(maxAttempts = 3, backoff = @Backoff(delay = 500), include = {RetryException.class})
     public void scrollElementIntoView(WebElement element) {
         try {
-            driverManager.getDriver().executeScript("arguments[0].scrollIntoView(true);", element);
+            driverManager.getJSExecutor().executeScript("arguments[0].scrollIntoView(true);", element);
         } catch (Exception ignored) {
             logger.warn("Could not click on the element : " + element);
             throw new RetryException("Could not click on the element : " + element);
@@ -168,7 +168,7 @@ public class DriverHelper {
      */
     private void clear(WebElement element) {
         try {
-            driverManager.getDriver().executeScript("arguments[0].value='';", element);
+            driverManager.getJSExecutor().executeScript("arguments[0].value='';", element);
         } catch (ElementNotInteractableException ignored) {
         }
     }

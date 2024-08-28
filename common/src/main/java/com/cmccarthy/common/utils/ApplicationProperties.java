@@ -12,6 +12,8 @@ public class ApplicationProperties {
     private String wikipediaUrl;
     @Value("${browser}")
     private String browser;
+    @Value("${cloud.url}")
+    private String cloudUrl;
 
     public String getWeatherAppUrl() {
         return weatherAppUrl;
@@ -35,5 +37,9 @@ public class ApplicationProperties {
 
     public void setBrowser(String browser) {
         this.browser = browser;
+    }
+
+    public String getCloudUrl() {
+        return cloudUrl;
     }
 }

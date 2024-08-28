@@ -3,24 +3,39 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <artifactId>wikipedia</artifactId>
+
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
-                <artifactId>maven-remote-resources-plugin</artifactId>
-                <configuration>
-                    <resourceBundles>
-                        <resourceBundle>spring-cucumber-junit-parallel-test-harness:common:1.0-SNAPSHOT</resourceBundle>
-                    </resourceBundles>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
+                        <id>default-resources</id>
+                        <phase>process-resources</phase>
                         <goals>
-                            <goal>process</goal>
+                            <goal>resources</goal>
                         </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                        <include>**/*.properties</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
-                <groupId>org.apache.maven.plugins</groupId>
-                <version>1.7.0</version>
             </plugin>
         </plugins>
     </build>
@@ -36,7 +51,11 @@
             <groupId>com.paulhammant</groupId>
             <version>1.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>7.1.0</version>
+        </dependency>
         <dependency>
             <artifactId>selenium-java</artifactId>
             <groupId>org.seleniumhq.selenium</groupId>

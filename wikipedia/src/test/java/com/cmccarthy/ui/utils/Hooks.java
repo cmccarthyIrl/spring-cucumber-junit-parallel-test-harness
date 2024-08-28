@@ -8,6 +8,8 @@ import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
+
 @CucumberContextConfiguration
 public class Hooks extends WikipediaAbstractTestDefinition {
 
@@ -19,7 +21,7 @@ public class Hooks extends WikipediaAbstractTestDefinition {
     private DriverManager driverManager;
 
     @Before
-    public void beforeScenario(Scenario scenario) {
+    public void beforeScenario(Scenario scenario) throws IOException {
         synchronized (lock) {
             if (!initialized) {
                 if (!driverManager.isDriverExisting()) {

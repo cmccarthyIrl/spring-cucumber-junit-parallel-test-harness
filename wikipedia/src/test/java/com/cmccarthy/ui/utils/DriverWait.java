@@ -2,10 +2,7 @@ package com.cmccarthy.ui.utils;
 
 import com.cmccarthy.ui.utils.expectedConditions.*;
 import com.paulhammant.ngwebdriver.NgWebDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ScriptTimeoutException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -13,6 +10,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -27,6 +25,7 @@ public class DriverWait {
     private final DriverManager driverManager;
 
     @Autowired
+    @Lazy
     public DriverWait(DriverManager driverManager) {
         this.driverManager = driverManager;
     }
@@ -51,7 +50,7 @@ public class DriverWait {
      * Wait for Angular loads using Ng Driver
      */
     private void ngDriverWait() {
-        final NgWebDriver ngWebDriver = new NgWebDriver(driverManager.getDriver());
+        final NgWebDriver ngWebDriver = new NgWebDriver(driverManager.getJSExecutor());
         try {
             ngWebDriver.waitForAngularRequestsToFinish();
         } catch (ScriptTimeoutException exception) {
@@ -122,14 +121,14 @@ public class DriverWait {
         }
     }
 
-    public Wait<ChromeDriver> waitLong() {
+    public Wait<WebDriver> waitLong() {
         return new FluentWait<>(driverManager.getDriver())
                 .withTimeout(Duration.ofSeconds(Constants.timeoutLong))
                 .pollingEvery(Duration.ofMillis(Constants.pollingLong))
                 .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
     }
 
-    public Wait<ChromeDriver> waitShort() {
+    public Wait<WebDriver> waitShort() {
         return new FluentWait<>(driverManager.getDriver())
                 .withTimeout(Duration.ofSeconds(Constants.timeoutShort))
                 .pollingEvery(Duration.ofMillis(Constants.pollingShort))
@@ -138,11 +137,11 @@ public class DriverWait {
 
     private void waitUntilAngularReady() {
 
-        final Boolean angularUnDefined = (Boolean) driverManager.getDriver()
+        final Boolean angularUnDefined = (Boolean) driverManager.getJSExecutor()
                 .executeScript("return window.angular === undefined");
 
         if (!angularUnDefined) {
-            Boolean angularInjectorUnDefined = (Boolean) driverManager.getDriver()
+            Boolean angularInjectorUnDefined = (Boolean) driverManager.getJSExecutor()
                     .executeScript("return angular.element(document).injector() === undefined");
             if (!angularInjectorUnDefined) {
                 waitForAngularLoad();
@@ -158,10 +157,10 @@ public class DriverWait {
         final String angularReadyScript = "return angular.element(document).injector().get('$http').pendingRequests.length === 0";
 
         final ExpectedCondition<Boolean> angularLoad = driver -> Boolean.valueOf(
-                (driverManager.getDriver()).executeScript(angularReadyScript).toString());
+                (driverManager.getJSExecutor()).executeScript(angularReadyScript).toString());
 
         boolean angularReady = Boolean
-                .parseBoolean(driverManager.getDriver().executeScript(angularReadyScript).toString());
+                .parseBoolean(driverManager.getJSExecutor().executeScript(angularReadyScript).toString());
 
         if (!angularReady) {
             waitLong().until(angularLoad);
@@ -169,12 +168,12 @@ public class DriverWait {
     }
 
     private void waitUntilJSReady() {
-        final ExpectedCondition<Boolean> jsLoad = driver -> (driverManager.getDriver())
+        final ExpectedCondition<Boolean> jsLoad = driver -> (driverManager.getJSExecutor())
                 .executeScript("return document.readyState")
                 .toString()
                 .equals("complete");
 
-        boolean jsReady = driverManager.getDriver().executeScript("return document.readyState")
+        boolean jsReady = driverManager.getJSExecutor().executeScript("return document.readyState")
                 .toString().equals("complete");
 
         if (!jsReady) {
@@ -184,9 +183,9 @@ public class DriverWait {
 
     private void waitForJQueryLoad() {
         final ExpectedCondition<Boolean> jQueryLoad = driver -> (
-                (Long) (driverManager.getDriver()).executeScript("return jQuery.active") == 0);
+                (Long) (driverManager.getJSExecutor()).executeScript("return jQuery.active") == 0);
 
-        boolean jqueryReady = (Boolean) driverManager.getDriver()
+        boolean jqueryReady = (Boolean) driverManager.getJSExecutor()
                 .executeScript("return jQuery.active==0");
 
         if (!jqueryReady) {

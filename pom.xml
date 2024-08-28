@@ -34,7 +34,7 @@
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
-        <version>3.0.4</version>
+        <version>3.3.3</version>
         <relativePath/>
     </parent>
 
@@ -42,6 +42,8 @@
         <activeProfile>prod</activeProfile>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <java.version>17</java.version>
+        <resource.plugin.version>3.1.0</resource.plugin.version>
+        <junit.platform.suite.version>1.11.0</junit.platform.suite.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <restassured.version>5.2.0</restassured.version>
@@ -106,12 +108,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 
     <dependencyManagement>
@@ -119,7 +115,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.0.4</version>
+                <version>3.3.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -130,7 +126,7 @@
         <dependency>
             <artifactId>json</artifactId>
             <groupId>org.json</groupId>
-            <version>20220924</version>
+            <version>20231013</version>
         </dependency>
 
         <!--  Cucumber dependencies-->
@@ -154,7 +150,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite</artifactId>
-            <version>1.9.2</version>
+            <version>${junit.platform.suite.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -172,14 +168,13 @@
         <dependency>
             <groupId>tech.grasshopper</groupId>
             <artifactId>extentreports-cucumber7-adapter</artifactId>
-            <version>1.9.0</version>
+            <version>1.14.0</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber7-jvm</artifactId>
             <version>2.21.0</version>
         </dependency>
-
 
         <!--test dependencies -->
         <dependency>
@@ -195,9 +190,8 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-api</artifactId>
-            <version>1.9.2</version>
+            <version>${junit.platform.suite.version}</version>
         </dependency>
-
 
         <!--spring dependencies-->
         <dependency>
@@ -251,6 +245,12 @@
             <id>dev</id>
             <properties>
                 <activatedProperties>dev</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>cloud-provider</id>
+            <properties>
+                <activatedProperties>cloud-provider</activatedProperties>
             </properties>
         </profile>
     </profiles>
