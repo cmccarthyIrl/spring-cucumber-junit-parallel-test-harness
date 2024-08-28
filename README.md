@@ -1,7 +1,6 @@
 # Spring Cucumber Junit Parallel Test Harness
 
-[![run](https://github.com/cmccarthyIrl/spring-cucumber-testng-parallel-test-harness/actions/workflows/run.yml/badge.svg)](https://github.com/cmccarthyIrl/spring-cucumber-testng-parallel-test-harness/actions/workflows/run.yml)
-
+[![test](https://github.com/cmccarthyIrl/spring-cucumber-junit-parallel-test-harness/actions/workflows/test.yml/badge.svg)](https://github.com/cmccarthyIrl/spring-cucumber-junit-parallel-test-harness/actions/workflows/test.yml)
 # Index
 
 <table> 
