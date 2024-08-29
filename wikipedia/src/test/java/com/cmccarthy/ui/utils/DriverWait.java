@@ -20,7 +20,11 @@ import java.util.NoSuchElementException;
 public class DriverWait {
 
     private final Logger logger = LoggerFactory.getLogger(DriverWait.class);
+    private static final ThreadLocal<Wait<WebDriver>> driverWaitThreadLocal = new ThreadLocal<>();
 
+    public ThreadLocal<Wait<WebDriver>> getDriverWaitThreadLocal() {
+        return driverWaitThreadLocal;
+    }
     private final DriverManager driverManager;
 
     @Autowired
@@ -28,6 +32,8 @@ public class DriverWait {
     public DriverWait(DriverManager driverManager) {
         this.driverManager = driverManager;
     }
+
+
 
     public void waitForAngular() {
         waitUntilAngularReady();

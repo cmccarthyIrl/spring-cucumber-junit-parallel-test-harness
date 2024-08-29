@@ -17,6 +17,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.NoSuchElementException;
@@ -102,8 +104,8 @@ public class DriverManager {
             default ->
                     throw new NoSuchElementException("Failed to create an instance of WebDriver for: " + applicationProperties.getBrowser());
         }
-//        driverWait.getDriverWaitThreadLocal()
-//                .set(new WebDriverWait(driverThreadLocal.get(), Duration.ofSeconds(Constants.timeoutShort), Duration.ofSeconds(Constants.pollingShort)));
+        driverWait.getDriverWaitThreadLocal()
+                .set(new WebDriverWait(driverThreadLocal.get(), Duration.ofSeconds(Constants.timeoutShort), Duration.ofSeconds(Constants.pollingShort)));
     }
 
     private void setRemoteDriver(URL hubUrl) {
@@ -135,8 +137,8 @@ public class DriverManager {
             default ->
                     throw new NoSuchElementException("Failed to create an instance of RemoteWebDriver for: " + applicationProperties.getBrowser());
         }
-//        driverWait.getDriverWaitThreadLocal()
-//                .set(new WebDriverWait(driverThreadLocal.get(), Duration.ofSeconds(Constants.timeoutShort), Duration.ofSeconds(Constants.pollingShort)));
+        driverWait.getDriverWaitThreadLocal()
+                .set(new WebDriverWait(driverThreadLocal.get(), Duration.ofSeconds(Constants.timeoutShort), Duration.ofSeconds(Constants.pollingShort)));
     }
 
     public WebDriver getDriver() {
