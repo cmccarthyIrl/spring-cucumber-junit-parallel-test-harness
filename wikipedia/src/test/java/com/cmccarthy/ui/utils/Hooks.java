@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 
 @CucumberContextConfiguration
+@SuppressWarnings("unused")
 public class Hooks extends WikipediaAbstractTestDefinition {
 
     private static final Object lock = new Object();
-    private static boolean initialized = false;
     @Autowired
     private HookUtil hookUtil;
     @Autowired
@@ -22,14 +22,6 @@ public class Hooks extends WikipediaAbstractTestDefinition {
 
     @Before
     public void beforeScenario(Scenario scenario) throws IOException {
-        synchronized (lock) {
-            if (!initialized) {
-                if (!driverManager.isDriverExisting()) {
-                    driverManager.downloadDriver();
-                }
-                initialized = true;
-            }
-        }
         driverManager.createDriver();
     }
 

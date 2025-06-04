@@ -47,19 +47,9 @@
         </dependency>
         <!-- Selenium dependencies-->
         <dependency>
-            <artifactId>ngwebdriver</artifactId>
-            <groupId>com.paulhammant</groupId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>selenide</artifactId>
-            <version>7.1.0</version>
-        </dependency>
-        <dependency>
             <artifactId>selenium-java</artifactId>
             <groupId>org.seleniumhq.selenium</groupId>
-            <version>4.6.0</version>
+            <version>${selenium.version}</version>
         </dependency>
     </dependencies>
 
