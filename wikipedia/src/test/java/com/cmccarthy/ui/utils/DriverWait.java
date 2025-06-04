@@ -1,7 +1,6 @@
 package com.cmccarthy.ui.utils;
 
 import com.cmccarthy.ui.utils.expectedConditions.*;
-import com.paulhammant.ngwebdriver.NgWebDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -11,9 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 
 @Component
@@ -33,8 +32,6 @@ public class DriverWait {
         this.driverManager = driverManager;
     }
 
-
-
     public void waitForAngular() {
         waitUntilAngularReady();
     }
@@ -49,19 +46,6 @@ public class DriverWait {
         waitForAngular();
         waitForElementVisible(locator);
         waitForElementClickable(locator);
-    }
-
-    /**
-     * Wait for Angular loads using Ng Driver
-     */
-    private void ngDriverWait() {
-        final NgWebDriver ngWebDriver = new NgWebDriver(driverManager.getJSExecutor());
-        try {
-            ngWebDriver.waitForAngularRequestsToFinish();
-        } catch (ScriptTimeoutException exception) {
-            logger.info("Problems waiting for Angular to load with NgWeb Driver");
-            logger.debug("Problems waiting for Angular to load with NgWeb Driver");
-        }
     }
 
     /**
@@ -145,14 +129,13 @@ public class DriverWait {
         final Boolean angularUnDefined = (Boolean) driverManager.getJSExecutor()
                 .executeScript("return window.angular === undefined");
 
-        if (!angularUnDefined) {
+        if (Boolean.FALSE.equals(angularUnDefined)) {
             Boolean angularInjectorUnDefined = (Boolean) driverManager.getJSExecutor()
                     .executeScript("return angular.element(document).injector() === undefined");
-            if (!angularInjectorUnDefined) {
+            if (Boolean.FALSE.equals(angularInjectorUnDefined)) {
                 waitForAngularLoad();
                 waitUntilJSReady();
                 waitForJQueryLoad();
-                ngDriverWait();
             }
         }
     }
@@ -162,10 +145,10 @@ public class DriverWait {
         final String angularReadyScript = "return angular.element(document).injector().get('$http').pendingRequests.length === 0";
 
         final ExpectedCondition<Boolean> angularLoad = driver -> Boolean.valueOf(
-                (driverManager.getJSExecutor()).executeScript(angularReadyScript).toString());
+                Objects.requireNonNull((driverManager.getJSExecutor()).executeScript(angularReadyScript)).toString());
 
         boolean angularReady = Boolean
-                .parseBoolean(driverManager.getJSExecutor().executeScript(angularReadyScript).toString());
+                .parseBoolean(Objects.requireNonNull(driverManager.getJSExecutor().executeScript(angularReadyScript)).toString());
 
         if (!angularReady) {
             waitLong().until(angularLoad);
@@ -173,12 +156,12 @@ public class DriverWait {
     }
 
     private void waitUntilJSReady() {
-        final ExpectedCondition<Boolean> jsLoad = driver -> (driverManager.getJSExecutor())
-                .executeScript("return document.readyState")
+        final ExpectedCondition<Boolean> jsLoad = driver -> Objects.requireNonNull((driverManager.getJSExecutor())
+                        .executeScript("return document.readyState"))
                 .toString()
                 .equals("complete");
 
-        boolean jsReady = driverManager.getJSExecutor().executeScript("return document.readyState")
+        boolean jsReady = Objects.requireNonNull(driverManager.getJSExecutor().executeScript("return document.readyState"))
                 .toString().equals("complete");
 
         if (!jsReady) {

@@ -1,12 +1,10 @@
 package com.cmccarthy.ui.utils;
 
 import com.cmccarthy.common.utils.ApplicationProperties;
-import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -54,51 +52,36 @@ public class DriverManager {
             } else {
                 setLocalWebDriver();
             }
-            WebDriverRunner.setWebDriver(getDriver());
-            WebDriverRunner.getWebDriver().manage().deleteAllCookies();//useful for AJAX pages
+            getDriver().manage().deleteAllCookies();//useful for AJAX pages
         }
     }
 
     public void setLocalWebDriver() throws IOException {
         switch (applicationProperties.getBrowser()) {
             case ("chrome") -> {
-                String path = Arrays.toString(this.environment.getActiveProfiles()).contains("headless-github") ?
-                        System.getProperty("user.dir") + "/src/test/resources/drivers" : Constants.DRIVER_DIRECTORY;
-                ChromeDriverService src = new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File(path + "/chromedriver" + getExtension()))
-                        .usingAnyFreePort().build();
-                src.start();
-
-                System.setProperty("webdriver.chrome.driver", path + "/chromedriver" + getExtension());
-
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-logging");
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--headless=new");
-                driverThreadLocal.set(new ChromeDriver(src, options));
+                driverThreadLocal.set(new ChromeDriver(options));
             }
             case ("firefox") -> {
-                System.setProperty("webdriver.gecko.driver", Constants.DRIVER_DIRECTORY + "/geckodriver" + getExtension());
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
                 firefoxOptions.setCapability("marionette", true);
                 driverThreadLocal.set(new FirefoxDriver(firefoxOptions));
             }
             case ("ie") -> {
-                System.setProperty("webdriver.ie.driver", Constants.DRIVER_DIRECTORY + "/IEDriverServer" + getExtension());
                 InternetExplorerOptions capabilitiesIE = new InternetExplorerOptions();
                 capabilitiesIE.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                 driverThreadLocal.set(new InternetExplorerDriver(capabilitiesIE));
             }
             case ("safari") -> {
                 SafariOptions operaOptions = new SafariOptions();
-                System.setProperty("webdriver.opera.driver", Constants.DRIVER_DIRECTORY + "/operadriver" + getExtension());
                 driverThreadLocal.set(new SafariDriver(operaOptions));
             }
             case ("edge") -> {
                 EdgeOptions edgeOptions = new EdgeOptions();
-                System.setProperty("webdriver.edge.driver", Constants.DRIVER_DIRECTORY + "/MicrosoftWebDriver" + getExtension());
                 driverThreadLocal.set(new EdgeDriver(edgeOptions));
             }
             default ->
