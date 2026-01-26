@@ -187,7 +187,7 @@
         <dependency>
             <artifactId>assertj-core</artifactId>
             <groupId>org.assertj</groupId>
-            <version>3.23.1</version>
+            <version>3.27.7</version>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
